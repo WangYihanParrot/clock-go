@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>时钟</title>
+  <style>
+    html, body {
+      margin: 0; padding: 0;
+      height: 100%;
+      background: white;
+      color: black;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+    }
+    #clock {
+      font-size: 20vw;
+    }
+    #date {
+      font-size: 5vw;
+      margin-top: 2vh;
+    }
+    label {
+      user-select: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 1vw;
+      transition: all 0.3s ease;
+      margin-top: 2vh;
+    }
+    /* 未选中，大按钮 */
+    label.big {
+      font-size: 6vw;
+    }
+    label.big input[type="checkbox"] {
+      width: 5vw;
+      height: 5vw;
+    }
+    /* 选中后，小按钮 */
+    label.small {
+      font-size: 3vw;
+    }
+    label.small input[type="checkbox"] {
+      width: 2.5vw;
+      height: 2.5vw;
+    }
+  </style>
+</head>
+<body>
+  <div id="clock">--:--:--</div>
+  <div id="date">----年--月--日 星期--</div>
+
+  <label>
+    <input type="checkbox" id="wakelock-toggle" />
+    保持屏幕常亮
+  </label>
+
+  <script src="https://unpkg.com/nosleep.js@0.12.0/dist/NoSleep.min.js"></script>
+  <script>
+    // 时间日期更新
+    const clockEl = document.getElementById('clock');
+    const dateEl = document.getElementById('date');
+    const weekList = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+
+    function updateClock() {
+      const now = new Date();
+      clockEl.innerText = now.toLocaleTimeString('zh-CN', { hour12: false });
+      dateEl.innerText = `${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日 ${weekList[now.getDay()]}`;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // NoSleep.js 防止息屏
+    const noSleep = new NoSleep();
+    const toggle = document.getElementById('wakelock-toggle');
+    const label = toggle.parentElement;
+
+    // 初始默认大按钮
+    label.classList.add('big');
+
+    // 页面首次点击时“预激活”NoSleep权限（开启又关闭）
+    function enableOnce() {
+      noSleep.enable();
+      noSleep.disable();
+      document.removeEventListener('click', enableOnce);
+    }
+    document.addEventListener('click', enableOnce);
+
+    toggle.addEventListener('change', () => {
+      if (toggle.checked) {
+        noSleep.enable();  // 开启防息屏
+        label.classList.remove('big');
+        label.classList.add('small');
+        console.log('🟢 屏幕保持常亮');
+      } else {
+        noSleep.disable(); // 关闭防息屏
+        label.classList.remove('small');
+        label.classList.add('big');
+        console.log('🔴 屏幕允许息屏');
+      }
+    });
+  </script>
+</body>
+</html>

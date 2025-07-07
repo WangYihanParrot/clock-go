@@ -1,2 +1,6 @@
-# silver-computing-machine
-Clock-go is a website developed using Go that displays the current time and features a screen wake-lock function to prevent the screen from turning off. The wake-lock functionality is implemented using NoSleep.js.
+# clock-go
+Clock-go 是一个使用 Go 开发的网页应用，主要用于显示当前时间。它还具备防止设备自动息屏的功能，适合长时间观看时钟或进行专注任务时使用。
+
+防止息屏功能是通过集成 [NoSleep.js](https://github.com/richtr/NoSleep.js/tree/master) 实现的，这是一个前端 JavaScript 库，可以通过播放一个静音的视频来保持设备屏幕常亮。这样用户在使用该网站时，就不必担心屏幕自动变暗或休眠。
+
+目前已完成基础版本，后续计划可能会加入更多功能，比如番茄钟、世界时间或全屏显示等。

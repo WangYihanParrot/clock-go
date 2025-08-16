@@ -2,7 +2,7 @@
 
 **Clock-go** 是一个使用 Go 开发的网页应用，主要用于显示当前时间。它特别适合在需要长时间查看时钟或进行专注任务时使用，因为它内置了防止设备自动息屏的功能。
 
-## 特性
+## ✨ 特性
 
 - 实时显示当前时间
 - 防止设备息屏（通过集成 [NoSleep.js](https://github.com/richtr/NoSleep.js/tree/master) 实现）
@@ -10,10 +10,10 @@
 
 防息屏是通过播放一个静音视频来实现的，这样可以保持屏幕持续亮着，不会自动变暗或进入休眠状态。
 
-示例网站：  
-[https://clock.parrotstudio.xyz/](https://clock.parrotstudio.xyz/)
+📌 示例网站：  
+👉 [https://clock.parrotstudio.xyz/](https://clock.parrotstudio.xyz/)
 
-## 使用教程
+## 🚀 使用教程
 
 以 Linux 为例，使用步骤如下：
 
@@ -27,10 +27,10 @@
 
 上面这行的含义是：使用 `8080` 端口来监听访问。你可以替换为你想要监听的其他端口。
 
-## 编译
+## 🛠️ 后续计划
 
-```bash
-./build.ps1
-````
+- ✅ 基础时钟功能
+- 🕒 番茄钟（计划中）
+- 🌍 世界时间（计划中）
 
 欢迎体验并提出建议！
